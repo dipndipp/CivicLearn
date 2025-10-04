@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -10,10 +11,7 @@ import (
 	"github.com/naufalwaiz/hukum-chatbot/internal/handlers"
 )
 
-
 func main() {
-	
-
 	// Load .env
 	if err := godotenv.Load(); err != nil {
 		log.Println("⚠️ No .env file found, using system env")
@@ -28,11 +26,12 @@ func main() {
 	// Tambahkan middleware CORS di sini
 	r.Use(cors.Default())
 
+	// Routes
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
 	r.POST("/chatbot", handlers.Chatbot)
 	r.GET("/health", handlers.HealthCheck)
-	r.GET("/users", handlers.GetAllUsers) // List all users (id, email)
+	r.GET("/users", handlers.GetAllUsers)
 
 	// News routes
 	r.POST("/news", handlers.CreateNews)
@@ -52,5 +51,11 @@ func main() {
 	r.GET("/forum/:id/replies", handlers.GetReplies)
 	r.POST("/forum/:id/replies", handlers.CreateReply)
 
-	r.Run(":8080")
+	// Ambil PORT dari Railway (default 8080 kalau local)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Println("🚀 Server running on port", port)
+	r.Run(":" + port)
 }
