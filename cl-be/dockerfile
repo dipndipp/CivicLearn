@@ -10,8 +10,8 @@ RUN go mod download
 # Copy semua source code
 COPY . .
 
-# Build binary
-RUN go build -o main .
+# Build binary dari cmd/server/main.go
+RUN go build -o main ./cmd/server/main.go
 
 # Stage kedua: image lebih kecil
 FROM debian:bookworm-slim
