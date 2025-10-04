@@ -1,6 +1,6 @@
 <!-- ================= HEADER / BADGES ================= -->
 <p align="center">
-  <img src="https://your-domain.com/logo.png" alt="CivicLearn Logo" width="200" />
+  <img src="https:///https://github.com/dipndipp/CivicLearn/tree/main/cl-fe/public/logo.svg" alt="CivicLearn Logo" width="200" />
 </p>
 
 <h1 align="center">CivicLearn</h1>
