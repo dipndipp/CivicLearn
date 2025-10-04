@@ -1,0 +1,7 @@
+[build]
+builder = "dockerfile"
+buildCommand = "cd cl-be && go build -o main ."
+
+[deploy]
+startCommand = "./cl-be/main"
+restartPolicyType = "on_failure"
