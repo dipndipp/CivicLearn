@@ -12,18 +12,15 @@ import (
 )
 
 func main() {
-	// Load .env
+	// Load .env (optional)
 	if err := godotenv.Load(); err != nil {
 		log.Println("⚠️ No .env file found, using system env")
 	}
 
-	// Init DB
+	// Init DB connection
 	config.InitDB()
 
-	// Login and Register routes
 	r := gin.Default()
-
-	// Tambahkan middleware CORS di sini
 	r.Use(cors.Default())
 
 	// Routes
@@ -33,29 +30,27 @@ func main() {
 	r.GET("/health", handlers.HealthCheck)
 	r.GET("/users", handlers.GetAllUsers)
 
-	// News routes
 	r.POST("/news", handlers.CreateNews)
 	r.GET("/news", handlers.GetAllNews)
 	r.GET("/news/:id", handlers.GetNewsByID)
 	r.PUT("/news/:id", handlers.UpdateNews)
 	r.DELETE("/news/:id", handlers.DeleteNews)
 
-	// Forum routes
 	r.POST("/forum", handlers.CreateForum)
 	r.GET("/forum", handlers.GetAllForums)
 	r.GET("/forum/:id", handlers.GetForumByID)
 	r.PUT("/forum/:id", handlers.UpdateForum)
 	r.DELETE("/forum/:id", handlers.DeleteForum)
 
-	// Forum replies routes
 	r.GET("/forum/:id/replies", handlers.GetReplies)
 	r.POST("/forum/:id/replies", handlers.CreateReply)
 
-	// Ambil PORT dari Railway (default 8080 kalau local)
+	// Ambil port dari env Railway
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "8080" // fallback kalau dijalankan lokal
 	}
-	log.Println("🚀 Server running on port", port)
+
+	log.Println("🚀 Server running on port " + port)
 	r.Run(":" + port)
 }
