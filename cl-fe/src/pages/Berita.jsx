@@ -8,7 +8,7 @@ export default function Berita() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("https://civiclearn-production.up.railway.app//news")
+    fetch("https://civiclearn-production.up.railway.app/news")
       .then((res) => {
         if (!res.ok) throw new Error("Gagal memuat berita");
         return res.json();
