@@ -9,7 +9,7 @@ export default function NewsDetail() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8080/news/${id}`)
+    fetch(`https://civiclearn-production.up.railway.app/news/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Gagal memuat detail berita");
         return res.json();
