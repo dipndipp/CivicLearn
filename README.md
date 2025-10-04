@@ -1,29 +1,38 @@
+<!-- ================= HEADER / BADGES ================= -->
+<p align="center">
+  <img src="https://your-domain.com/logo.png" alt="CivicLearn Logo" width="200" />
+</p>
 
-# CIVICLEARN - BE
+<h1 align="center">CivicLearn</h1>
 
-Merupakan website yang digunakan untuk mengikuti ajang lomba yang di selenggarakan oleh switchfest. website ini dibuat degan mengusung tema dengan menganggakn SGDs di poin ke 4 dan poin ke 16.
+<p align="center">
+  <a href="https://github.com/dipndipp/CivicLearn/actions"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/dipndipp/CivicLearn/ci.yml?branch=main"/></a>
+  <a href="https://github.com/dipndipp/CivicLearn/releases"><img alt="Release" src="https://img.shields.io/github/v/release/dipndipp/CivicLearn"/></a>
+  <a href="https://github.com/dipndipp/CivicLearn/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/dipndipp/CivicLearn"/></a>
+</p>
 
+---
 
+## 🎯 Sekilas Tentang CivicLearn
 
+**CivicLearn** adalah aplikasi berbasis web yang dirancang sebagai **platform kompetisi & edukasi kewargaan** untuk mendukung tema SDG (khususnya poin ke-4 & poin ke-16).  
+Platform bertujuan mendorong partisipasi aktif, dialog, dan literasi masyarakat dalam isu-isu sosial dan pemerintahan.
 
-## Features
+Beberapa fitur utama:
 
-- Login and Register Account with JWT auth
-- CRUD News
-- CRUD Forum Discussion
+- 🧑‍💻 Autentikasi (Login / Register) menggunakan JWT  
+- 📰 CRUD Berita / Artikel  
+- 💬 CRUD Forum Diskusi
 
-
-## Installation
-
-Install terlebih dahulu compiler Golang kemudian ikuti cara di bawah ini.
-
+### Backend (cl-be)
 ```bash
-  go get
-```
-
-Ketika sudah install semua packagenya, maka jalankan projectnya dengan cara sebagai berikut : 
-
-```bash
+cd cl-be
+go mod download
 go run cmd/server/main.go
-```
-    
+
+### Frontend (cl-fe)
+```bash
+cd cl-fe
+npm install
+npm run dev
+
