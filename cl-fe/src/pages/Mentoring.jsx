@@ -34,7 +34,9 @@ export default function Mentoring() {
   // Fetch threads from backend
   async function fetchThreads() {
     try {
-      const res = await fetch("/api/forum");
+      const res = await fetch(
+        "https://civiclearn-production.up.railway.app/forum"
+      );
       if (!res.ok) throw new Error("Gagal fetch forum");
       const data = await res.json();
       const threadsArr = Array.isArray(data)
@@ -153,7 +155,7 @@ export default function Mentoring() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f3ec] flex flex-col items-center relative overflow-x-hidden pt-20 pb-10">
+    <div className="min-h-screen bg-[#f8f3ec] flex flex-col items-center relative overflow-x-hidden pt-30 pb-10">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
