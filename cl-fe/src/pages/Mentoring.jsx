@@ -128,7 +128,7 @@ export default function Mentoring() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           body: replyText,
-          author: "Kamu", // TODO: replace with logged-in user if available
+          author: user?.usn || user?.email || "User",
         }),
       });
       if (!res.ok) throw new Error("Gagal mengirim balasan");
