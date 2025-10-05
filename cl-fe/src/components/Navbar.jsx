@@ -25,7 +25,7 @@ const Navbar = () => {
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="bg-white/90 backdrop-blur-md rounded-full shadow-lg flex justify-between items-center px-8 py-3"
+          className="bg-white/90 backdrop-blur-md rounded-full shadow-lg flex justify-between items-center px-8 py-3 relative"
         >
           {/* Logo */}
           <div className="flex items-center">
@@ -36,8 +36,8 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex">
+          {/* Desktop Navigation - Centered Absolutely */}
+          <nav className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <ul className="flex gap-8 text-base font-semibold text-gray-800">
               <li>
                 <Link
@@ -87,59 +87,62 @@ const Navbar = () => {
           </nav>
 
           {/* Login Button or User Info */}
-          {user && (user.usn || user.email) ? (
-            <div className="hidden md:flex items-center gap-3">
-              <span className="text-gray-700 font-semibold">
-                Hello, {user.usn ? user.usn : user.email ? user.email : "User"}
-              </span>
-              <button
-                className="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center border border-orange-200 hover:bg-orange-200 transition relative"
-                onClick={() => setShowProfile((v) => !v)}
-                aria-label="Profile"
-              >
-                <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
-                  <circle
-                    cx="12"
-                    cy="8"
-                    r="4"
-                    stroke="#f4845f"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M4 20v-1c0-2.21 3.58-4 8-4s8 1.79 8 4v1"
-                    stroke="#f4845f"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </button>
-              {/* Modal Logout */}
-              {showProfile && (
-                <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 40 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="absolute top-16 right-0 bg-white rounded-xl shadow-lg border border-orange-100 p-4 z-50 min-w-[180px] flex flex-col items-center"
+          <div className="hidden md:flex items-center gap-3 relative">
+            {user && (user.usn || user.email) ? (
+              <>
+                <span className="text-gray-700 font-semibold">
+                  Hello,{" "}
+                  {user.usn ? user.usn : user.email ? user.email : "User"}
+                </span>
+                <button
+                  className="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center border border-orange-200 hover:bg-orange-200 transition relative"
+                  onClick={() => setShowProfile((v) => !v)}
+                  aria-label="Profile"
                 >
-                  <span className="text-gray-700 mb-2 font-semibold text-base">
-                    {user.usn ? user.usn : user.email ? user.email : "User"}
-                  </span>
-                  <button
-                    className="w-full bg-orange-500 text-white rounded-lg px-4 py-2 font-semibold hover:bg-orange-600 transition"
-                    onClick={() => setShowLogoutModal(true)}
+                  <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+                    <circle
+                      cx="12"
+                      cy="8"
+                      r="4"
+                      stroke="#f4845f"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M4 20v-1c0-2.21 3.58-4 8-4s8 1.79 8 4v1"
+                      stroke="#f4845f"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                </button>
+                {/* Modal Logout */}
+                {showProfile && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 40 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="absolute top-16 right-0 bg-white rounded-xl shadow-lg border border-orange-100 p-4 z-50 min-w-[180px] flex flex-col items-center"
                   >
-                    Logout
-                  </button>
-                </motion.div>
-              )}
-            </div>
-          ) : (
-            <Link to="/login" className="hidden md:block">
-              <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition">
-                Login
-              </button>
-            </Link>
-          )}
+                    <span className="text-gray-700 mb-2 font-semibold text-base">
+                      {user.usn ? user.usn : user.email ? user.email : "User"}
+                    </span>
+                    <button
+                      className="w-full bg-orange-500 text-white rounded-lg px-4 py-2 font-semibold hover:bg-orange-600 transition"
+                      onClick={() => setShowLogoutModal(true)}
+                    >
+                      Logout
+                    </button>
+                  </motion.div>
+                )}
+              </>
+            ) : (
+              <Link to="/login">
+                <button className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                  Login
+                </button>
+              </Link>
+            )}
+          </div>
 
           {/* Mobile Menu Button */}
           <button
