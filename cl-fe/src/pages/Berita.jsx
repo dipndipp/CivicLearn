@@ -19,7 +19,7 @@ export default function Berita() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-[#f8f3ec] to-orange-100 pb-10 pt-24 px-2 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-[#f8f3ec] to-orange-100 pb-10 pt-28 px-2 flex flex-col">
       {/* Hero Section with animation */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
