@@ -54,7 +54,9 @@ export default function Mentoring() {
       await Promise.all(
         threadsArr.map(async (t) => {
           try {
-            const res = await fetch(`/api/forum/${t.id}/replies`);
+            const res = await fetch(
+              `https://civiclearn-production.up.railway.app/forum/${t.id}/replies`
+            );
             if (!res.ok) throw new Error();
             const replies = await res.json();
             counts[t.id] = Array.isArray(replies) ? replies.length : 0;
@@ -82,7 +84,9 @@ export default function Mentoring() {
     setErrorReplies("");
     setLoadingReplies(true);
     try {
-      const res = await fetch(`/api/forum/${thread.id}/replies`);
+      const res = await fetch(
+        `https://civiclearn-production.up.railway.app/forum/${thread.id}/replies`
+      );
       if (!res.ok) throw new Error("Gagal mengambil balasan");
       const data = await res.json();
       setReplies(Array.isArray(data) ? data : []);
@@ -99,15 +103,18 @@ export default function Mentoring() {
     e.preventDefault();
     if (!newThread.title.trim() || !newThread.content.trim()) return;
     try {
-      const res = await fetch("/api/forum", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: newThread.title,
-          body: newThread.content,
-          author: user?.usn || user?.email || "User",
-        }),
-      });
+      const res = await fetch(
+        "https://civiclearn-production.up.railway.app/forum",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: newThread.title,
+            body: newThread.content,
+            author: user?.usn || user?.email || "User",
+          }),
+        }
+      );
       if (!res.ok) throw new Error("Gagal posting thread");
       // Setelah post, fetch ulang agar auto-refresh
       await fetchThreads();
@@ -123,14 +130,17 @@ export default function Mentoring() {
     e.preventDefault();
     if (!replyText.trim() || !selectedThread) return;
     try {
-      const res = await fetch(`/api/forum/${selectedThread.id}/replies`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          body: replyText,
-          author: user?.usn || user?.email || "User",
-        }),
-      });
+      const res = await fetch(
+        `https://civiclearn-production.up.railway.app/forum/${selectedThread.id}/replies`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            body: replyText,
+            author: user?.usn || user?.email || "User",
+          }),
+        }
+      );
       if (!res.ok) throw new Error("Gagal mengirim balasan");
       const reply = await res.json();
       setReplies((prev) => [...prev, reply]);
