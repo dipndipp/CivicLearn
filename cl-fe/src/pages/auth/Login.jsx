@@ -20,11 +20,14 @@ const Login = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        "https://civiclearn-production.up.railway.app/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       if (!res.ok) throw new Error("Login gagal");
       const data = await res.json();
       // Simpan ke context global

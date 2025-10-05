@@ -21,11 +21,14 @@ const Register = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        "https://civiclearn-production.up.railway.app/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       if (!res.ok) throw new Error("Registrasi gagal");
       const data = await res.json();
       // Simpan ke context global
